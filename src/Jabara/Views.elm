@@ -19,7 +19,7 @@ import Html.Attributes exposing (..)
 {-| Font Awesome Icon with class attributes.
 Please refer Font Awesome css from html file.
 
-    button [] [ fas_ "class-button-icon" "sync" ]
+    button [] [ fas "class-button-icon" "sync" ]
 
 -}
 fas : String -> String -> Html msg
@@ -30,7 +30,7 @@ fas clsName iconName =
 {-| Font Awesome Icon without class attributes.
 Please refer Font Awesome css from html file.
 
-    div [] [ input [] [], fas "sync" ]
+    div [] [ input [] [], fas_ "sync" ]
 
 -}
 fas_ : String -> Html msg
