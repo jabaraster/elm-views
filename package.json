@@ -1,0 +1,14 @@
+{
+  "name": "views",
+  "version": "1.0.0",
+  "repository": "git@github.com:jabaraster/elm-views.git",
+  "author": "jabaraster <ah@jabara.info>",
+  "license": "MIT",
+  "scripts": {
+    "format": "prettier --write src package.json elm.json && yarn elm-format --yes src"
+  },
+  "devDependencies": {
+    "elm-format": "^0.8.7",
+    "prettier": "^3.2.5"
+  }
+}

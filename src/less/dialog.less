@@ -1,0 +1,65 @@
+@dialog-line-width: 1px;
+@dialog-margin-width: 1vw;
+@dialog-margin-height: 1vh;
+@header-height: 4rem;
+@border-radius: 0.5rem;
+
+dialog.dialog {
+  padding: 0;
+  border-radius: @border-radius;
+  border: @dialog-line-width solid rgba(0, 0, 0, 0.5);
+  margin-top: @dialog-margin-height;
+  margin-bottom: @dialog-margin-height;
+  margin-right: @dialog-margin-width;
+  margin-left: @dialog-margin-width;
+  max-height: 100vh - @dialog-margin-height * 2;
+  max-width: 100vw - @dialog-margin-width * 2;
+  box-sizing: border-box;
+
+  header.header,
+  footer.footer {
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 1);
+    position: relative;
+    width: calc(100vw - @dialog-margin-width * 2 - @dialog-line-width * 2);
+    height: @header-height;
+    padding: 0;
+  }
+  header.header {
+    border-top-left-radius: @border-radius;
+    border-top-right-radius: @border-radius;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    top: 0;
+  }
+  footer.footer {
+    border-bottom-left-radius: @border-radius;
+    border-bottom-right-radius: @border-radius;
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+    background-color: rgba(255, 255, 255, 1);
+    width: calc(100vw - @dialog-margin-width * 2 - @dialog-line-width * 2);
+    height: @header-height;
+    bottom: 0;
+  }
+  .contents {
+    padding: 1rem;
+    overflow-y: auto;
+    max-height: calc(
+      100vh - @dialog-margin-height * 2 - @header-height * 2 - 2rem
+        /*コンテンツのpadding*/ - 1rem /*調整*/
+    );
+  }
+}
+/* .modal-filler first dialog child needed to prevent closing on dialog padding */
+dialog:modal > .modal-filler {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+}
+/* scrim */
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.3);
+}

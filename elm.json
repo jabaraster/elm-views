@@ -1,16 +1,19 @@
 {
-    "type": "package",
-    "name": "jabaraster/elm-views",
-    "summary": "elm view library.",
-    "license": "BSD-3-Clause",
-    "version": "1.1.0",
-    "exposed-modules": [
-        "Jabara.Views"
-    ],
-    "elm-version": "0.19.0 <= v < 0.20.0",
-    "dependencies": {
-        "elm/core": "1.0.2 <= v < 2.0.0",
-        "elm/html": "1.0.0 <= v < 2.0.0"
-    },
-    "test-dependencies": {}
+  "type": "package",
+  "name": "jabaraster/views",
+  "summary": "elm view library.",
+  "license": "BSD-3-Clause",
+  "version": "0.0.1",
+  "exposed-modules": ["Views", "DataTable"],
+  "elm-version": "0.19.0 <= v < 0.20.0",
+  "dependencies": {
+    "ahstro/elm-bulma-classes": "4.0.0 <= v < 5.0.0",
+    "elm/core": "1.0.2 <= v < 2.0.0",
+    "elm/file": "1.0.5 <= v < 2.0.0",
+    "elm/html": "1.0.0 <= v < 2.0.0",
+    "elm-community/maybe-extra": "5.3.0 <= v < 6.0.0",
+    "perzanko/elm-loading": "2.0.5 <= v < 3.0.0",
+    "rtfeldman/elm-css": "17.1.1 <= v < 18.0.0"
+  },
+  "test-dependencies": {}
 }
