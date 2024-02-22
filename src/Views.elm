@@ -60,7 +60,6 @@ module Views exposing
 @docs switch
 @docs textArea
 @docs twoColumns
-@docs |
 
 -}
 

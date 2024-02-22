@@ -1,8 +1,20 @@
-module Styles exposing (..)
+module Styles exposing
+    ( label
+    , th
+    )
+
+{-| common styles.
+
+@docs label
+@docs th
+
+-}
 
 import Css exposing (..)
 
 
+{-| common th style.
+-}
 th : List Style
 th =
     [ fontSize (rem 0.8)
@@ -11,6 +23,8 @@ th =
     ]
 
 
+{-| common label style.
+-}
 label : List Style
 label =
     [ fontSize (pct 90)
