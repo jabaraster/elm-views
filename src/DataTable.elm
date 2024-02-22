@@ -8,7 +8,7 @@ module DataTable exposing
 import Bulma.Classes as B
 import Css exposing (..)
 import Grid
-import Html.Styled as Html exposing (Attribute, Html, button, div, header, span, text)
+import Html.Styled as Html exposing (Html, button, div, span, text)
 import Html.Styled.Attributes as Attributes exposing (..)
 import Html.Styled.Events exposing (..)
 import Loading
@@ -65,9 +65,10 @@ table :
     -> FilterParam msg
     -> EditorParam row msg
     -> UpdateParam row msg
+    -> (row -> String)
     -> List row
     -> Html msg
-table columns fetchP filterP editorP updateP datas =
+table columns fetchP filterP editorP updateP rowId datas =
     div [] <|
         Grid.grid
             (List.map
@@ -100,6 +101,7 @@ table columns fetchP filterP editorP updateP datas =
                     ]
                 ]
             , onRowClick = editorP.showEditorForUpdate
+            , rowId = rowId
             }
             datas
             ++ (case editorP.editorVisible of
@@ -107,15 +109,20 @@ table columns fetchP filterP editorP updateP datas =
                         []
 
                     _ ->
+                        let
+                            cc =
+                                [ marginTop (rem 0.8), Css.height (rem (4 - 0.8 * 2)) ]
+                        in
                         [ Views.dialog
                             { body = editorP.editor ()
                             , headerElements = []
                             , footerElements =
                                 [ button
                                     [ type_ "button"
-                                    , Views.concatClass [ B.button, B.levelItem, B.isLink ]
+                                    , Views.concatClass [ B.button, B.isLink ]
                                     , Attributes.disabled <| not <| updateP.checkInputForNew
                                     , onClick updateP.clickSave
+                                    , css <| [ marginLeft (rem 1), marginRight (px 4) ] ++ cc
                                     ]
                                     (if updateP.loading then
                                         [ Html.fromUnstyled <| Loading.render Loading.DoubleBounce Loading.defaultConfig Loading.On ]
@@ -127,8 +134,9 @@ table columns fetchP filterP editorP updateP datas =
                                     )
                                 , button
                                     [ type_ "button"
-                                    , Views.concatClass [ B.button, B.levelItem ]
+                                    , Views.concatClass [ B.button ]
                                     , onClick editorP.hideEditor
+                                    , css cc
                                     ]
                                     [ text "キャンセル" ]
                                 ]
@@ -168,49 +176,3 @@ rowControlViews { showEditorForNew, showEditorForUpdate, confirmDelete } =
     , update = \row -> Views.iconButton Pen [ onClick <| showEditorForUpdate row, css [ border zero ] ]
     , delete = \row -> Views.iconButton Trash [ onClick <| confirmDelete row, class B.isDanger, class B.isInverted, css [ border zero ] ]
     }
-
-
-dialogFooterStyle : List Style
-dialogFooterStyle =
-    [ backgroundColor (rgb 255 255 255)
-    , padding (px 4)
-    , position sticky
-    , bottom zero
-    , left zero
-    , right zero
-    ]
-
-
-dialogFooter :
-    { checkInputForNew : Bool
-    , clickSave : msg
-    , loading : Bool
-    , hideEditor : msg
-    }
-    -> Html msg
-dialogFooter { checkInputForNew, clickSave, loading, hideEditor } =
-    div [ class B.level, css dialogFooterStyle ]
-        [ div [ class B.levelLeft ] [] -- ダミーを入れないとlevel-rightが機能しない. 惜しい.
-        , div [ class B.levelRight ]
-            [ button
-                [ type_ "button"
-                , Views.concatClass [ B.button, B.levelItem, B.isLink ]
-                , Attributes.disabled <| not <| checkInputForNew
-                , onClick clickSave
-                ]
-                (if loading then
-                    [ Html.fromUnstyled <| Loading.render Loading.DoubleBounce Loading.defaultConfig Loading.On ]
-
-                 else
-                    [ Views.icon Save
-                    , span [] [ text "保存" ]
-                    ]
-                )
-            , button
-                [ type_ "button"
-                , Views.concatClass [ B.button, B.levelItem ]
-                , onClick hideEditor
-                ]
-                [ text "キャンセル" ]
-            ]
-        ]

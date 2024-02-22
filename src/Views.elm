@@ -594,7 +594,7 @@ dialog { body, headerElements, footerElements } =
     node "modal-dialog"
         [ attribute "open" "" ]
         [ node "dialog"
-            []
+            [ class "dialog" ]
             [ div [ class "modal-filler" ] []
             , header [ class "header" ] headerElements
             , div [ class "contents" ] body

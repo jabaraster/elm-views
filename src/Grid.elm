@@ -5,6 +5,7 @@ import Css exposing (..)
 import Html.Styled as Html exposing (Attribute, Html, button, div, span, text)
 import Html.Styled.Attributes as Attributes exposing (..)
 import Html.Styled.Events exposing (..)
+import Html.Styled.Keyed as Keyed
 import Maybe.Extra as Maybe
 import Styles
 import Views exposing (IconKind(..))
@@ -41,6 +42,7 @@ type alias FilterParam msg =
 type alias ViewParam row msg =
     { leftTopContent : List (Html msg)
     , onRowClick : row -> msg
+    , rowId : row -> String
     }
 
 
@@ -52,14 +54,15 @@ grid :
     -> List row
     -> List (Html msg)
 grid columns fetchP filterP viewP datas =
-    viewTop
+    [ viewTop
         { leftTopContent = viewP.leftTopContent
         , changeFilterText = filterP.changeFilterText
         , filterText = filterP.filterText
         }
-        :: viewHeader columns
-        :: List.map (viewRow columns viewP.onRowClick) datas
-        ++ [ viewFooter fetchP ]
+    , viewHeader columns
+    , Keyed.node "div" [] <| List.map (viewRow columns viewP.onRowClick viewP.rowId) datas
+    , viewFooter fetchP
+    ]
 
 
 viewFooter : FetchParam msg -> Html msg
@@ -116,10 +119,12 @@ viewTop { leftTopContent, changeFilterText, filterText } =
 viewRow :
     List (ColumnMeta row msg)
     -> (row -> msg)
+    -> (row -> String)
     -> row
-    -> Html msg
-viewRow columns onRowClick row =
-    div (css [ cursor pointer ] :: rowAttrs) <|
+    -> ( String, Html msg )
+viewRow columns onRowClick rowId row =
+    ( rowId row
+    , div (css [ cursor pointer ] :: rowAttrs) <|
         List.map
             (\column ->
                 div
@@ -134,6 +139,7 @@ viewRow columns onRowClick row =
                     [ column.html row ]
             )
             columns
+    )
 
 
 rowAttrs : List (Attribute msg)
