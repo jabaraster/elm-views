@@ -1,9 +1,9 @@
 {
   "type": "package",
-  "name": "jabaraster/views",
+  "name": "jabaraster/elm-views",
   "summary": "elm view library.",
   "license": "BSD-3-Clause",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "exposed-modules": ["Views", "DataTable"],
   "elm-version": "0.19.0 <= v < 0.20.0",
   "dependencies": {
