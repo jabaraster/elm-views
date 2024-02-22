@@ -5,6 +5,12 @@ module DataTable exposing
     , table
     )
 
+{-| data table component.
+@docs table
+    , ColumnMeta
+    , EditorVisible
+    , rowControlViews
+-}
 import Bulma.Classes as B
 import Css exposing (..)
 import Grid
@@ -15,12 +21,16 @@ import Loading
 import Views exposing (IconKind(..))
 
 
+{-| editor visible state.
+-}
 type EditorVisible
     = Hide
     | ShowForNew
     | ShowForUpdate
 
 
+{-| column meta data.
+-}
 type alias ColumnMeta row msg =
     { widthClass : String
     , label : String
@@ -28,25 +38,31 @@ type alias ColumnMeta row msg =
     }
 
 
+{-| fetch param.
+-}
 type alias FetchParam msg =
     Grid.FetchParam msg
 
 
+{-| filter param.
+-}
 type alias FilterParam msg =
     Grid.FilterParam msg
 
 
+{-| editor param.
+-}
 type alias EditorParam row msg =
     { showEditorForNew : msg
     , showEditorForUpdate : row -> msg
     , editorVisible : EditorVisible
-    , editor :
-        ()
-        -> List (Html msg) -- Elmは遅延実行がないので無駄な関数実行を防ぐ.
+    , editor : () -> List (Html msg) 
     , hideEditor : msg
     }
 
 
+{-| update param.
+-}
 type alias UpdateParam row msg =
     { confirmDelete : row -> msg
     , checkInputForNew : Bool
@@ -59,6 +75,8 @@ type alias UpdateParam row msg =
     }
 
 
+{-| build data table.
+-}
 table :
     List (ColumnMeta row msg)
     -> FetchParam msg
@@ -157,6 +175,8 @@ table columns fetchP filterP editorP updateP rowId datas =
                )
 
 
+{-| for customize.
+-}
 rowControlViews :
     { showEditorForNew : msg
     , showEditorForUpdate : row -> msg
