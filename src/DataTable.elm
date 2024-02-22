@@ -1,16 +1,19 @@
 module DataTable exposing
-    ( ColumnMeta
+    ( table
+    , ColumnMeta
     , EditorVisible(..)
     , rowControlViews
-    , table
     )
 
 {-| data table component.
+
 @docs table
-    , ColumnMeta
-    , EditorVisible
-    , rowControlViews
+@docs ColumnMeta
+@docs EditorVisible
+@docs rowControlViews
+
 -}
+
 import Bulma.Classes as B
 import Css exposing (..)
 import Grid
@@ -56,7 +59,7 @@ type alias EditorParam row msg =
     { showEditorForNew : msg
     , showEditorForUpdate : row -> msg
     , editorVisible : EditorVisible
-    , editor : () -> List (Html msg) 
+    , editor : () -> List (Html msg)
     , hideEditor : msg
     }
 

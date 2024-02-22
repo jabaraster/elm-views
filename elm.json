@@ -3,8 +3,8 @@
   "name": "jabaraster/elm-views",
   "summary": "elm view library.",
   "license": "BSD-3-Clause",
-  "version": "2.0.0",
-  "exposed-modules": ["Views", "DataTable"],
+  "version": "2.0.1",
+  "exposed-modules": ["Styles", "Views", "DataTable"],
   "elm-version": "0.19.0 <= v < 0.20.0",
   "dependencies": {
     "ahstro/elm-bulma-classes": "4.0.0 <= v < 5.0.0",

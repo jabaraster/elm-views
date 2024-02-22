@@ -27,36 +27,42 @@ module Views exposing
     , textArea
     , twoColumns
     )
+
 {-| view components.
+
+
 # view components
+
 @docs IconKind
-    , InputArg
-    , SelectedFile
-    , ViewElement
-    , backdrop
-    , build
-    , concatClass
-    , defaultInputArg
-    , defaultTextAreaArg
-    , dialog
-    , dialogConfirmation
-    , icon
-    , iconButton
-    , iconButtonText
-    , iconS
-    , imageSelector
-    , input
-    , input2
-    , inputUnderLine
-    , oneColumn
-    , oneColumnNoTBMargin
-    , oneColumnNoTopMargin
-    , select
-    , submitter
-    , switch
-    , textArea
-    , twoColumns
-|-}
+@docs InputArg
+@docs SelectedFile
+@docs ViewElement
+@docs backdrop
+@docs build
+@docs concatClass
+@docs defaultInputArg
+@docs defaultTextAreaArg
+@docs dialog
+@docs dialogConfirmation
+@docs icon
+@docs iconButton
+@docs iconButtonText
+@docs iconS
+@docs imageSelector
+@docs input
+@docs input2
+@docs inputUnderLine
+@docs oneColumn
+@docs oneColumnNoTBMargin
+@docs oneColumnNoTopMargin
+@docs select
+@docs submitter
+@docs switch
+@docs textArea
+@docs twoColumns
+@docs |
+
+-}
 
 import Bulma.Classes as B
 import Bulma.Helpers
@@ -89,8 +95,10 @@ import Html.Styled.Events exposing (..)
 import Html.Styled.Lazy exposing (..)
 import Loading
 
+
 {-| backdrop. ex) modal dialog back.
-|-}
+|
+-}
 backdrop : List (Attribute msg) -> List (Html msg) -> Html msg
 backdrop =
     styled div
@@ -105,7 +113,8 @@ backdrop =
 
 
 {-| 'input' function arguments.
-|-}
+|
+-}
 type alias InputArg msg =
     { value : String
     , label : String
@@ -116,7 +125,8 @@ type alias InputArg msg =
 
 
 {-| default input arg.
-|-}
+|
+-}
 defaultInputArg : InputArg msg
 defaultInputArg =
     { value = ""
@@ -133,7 +143,8 @@ defaultInputWrapperClass =
 
 
 {-| toggle button.
-|-}
+|
+-}
 switch : { value : Bool, onClick : msg } -> Html msg
 switch arg =
     let
@@ -208,7 +219,8 @@ defaultInput2OptionalArg =
 
 
 {-| input component.
-|-}
+|
+-}
 input2 :
     Input2RequiredArg msg
     -> (Input2OptionalArg msg -> Input2OptionalArg msg)
@@ -256,7 +268,8 @@ errors es =
 
 
 {-| input component.
-|-}
+|
+-}
 input : (InputArg msg -> InputArg msg) -> (String -> msg) -> Html msg
 input argBuilder handler =
     let
@@ -286,6 +299,7 @@ type alias TextAreaArg msg =
     , attributes : List (Attribute msg)
     }
 
+
 {-| default textarea arg.
 -}
 defaultTextAreaArg : TextAreaArg msg
@@ -299,7 +313,8 @@ defaultTextAreaArg =
 
 
 {-| textarea component.
-|-}
+|
+-}
 textArea :
     (TextAreaArg msg -> TextAreaArg msg)
     -> (String -> msg)
@@ -324,7 +339,8 @@ textArea argBuilder handler =
 
 
 {-| underlined input component.
-|-}
+|
+-}
 inputUnderLine : List (Attribute msg) -> List (Html msg) -> Html msg
 inputUnderLine attrs =
     let
@@ -341,28 +357,32 @@ inputUnderLine attrs =
 
 
 {-| only one column row.
-|-}
+|
+-}
 oneColumn : Html msg -> Html msg
 oneColumn tag =
     div [ class B.columns ] [ div [ class B.column ] [ tag ] ]
 
 
 {-| one column no top margin.
-|-}
+|
+-}
 oneColumnNoTopMargin : Html msg -> Html msg
 oneColumnNoTopMargin tag =
     div [ class B.columns, css [ marginTop zero ] ] [ div [ class B.column ] [ tag ] ]
 
 
 {-| one column no top and bottom margin.
-|-}
+|
+-}
 oneColumnNoTBMargin : Html msg -> Html msg
 oneColumnNoTBMargin tag =
     div [ class B.columns, css [ marginTop zero, marginBottom zero ] ] [ div [ class B.column ] [ tag ] ]
 
 
 {-| two columns row.
-|-}
+|
+-}
 twoColumns : Html msg -> Html msg -> Html msg
 twoColumns tag1 tag2 =
     div [ class B.columns ]
@@ -372,7 +392,8 @@ twoColumns tag1 tag2 =
 
 
 {-| select component.
-|-}
+|
+-}
 select :
     { value : Maybe a
     , values : List a
@@ -410,14 +431,16 @@ select { value, values, valueToString, valueToLabel, handler, attributes } =
 
 
 {-| concat class attributes.
-|-}
+|
+-}
 concatClass : List String -> Attribute msg
 concatClass =
     A.fromUnstyled << Bulma.Helpers.classList
 
 
 {-| icon kind. cf) font awesome
-|-}
+|
+-}
 type IconKind
     = Redo
     | Plus
@@ -441,7 +464,8 @@ type IconKind
 
 
 {-| icon kind to name.
-|-}
+|
+-}
 iconName : IconKind -> String
 iconName kind =
     case kind of
@@ -504,14 +528,16 @@ iconName kind =
 
 
 {-| only icon.
-|-}
+|
+-}
 icon : IconKind -> Html msg
 icon s =
     iconS (iconName s)
 
 
 {-| small icon.
-|-}
+|
+-}
 iconS : String -> Html msg
 iconS s =
     span [ class B.icon ]
@@ -520,21 +546,24 @@ iconS s =
 
 
 {-| button with icon.
-|-}
+|
+-}
 iconButton : IconKind -> List (Attribute msg) -> Html msg
 iconButton kind attrs =
     iconCore (iconName kind) "" attrs
 
 
 {-| button with icon and text.
-|-}
+|
+-}
 iconButtonText : IconKind -> String -> List (Attribute msg) -> Html msg
 iconButtonText kind innerText attrs =
     iconCore (iconName kind) innerText attrs
 
 
 {-| icon generator.
-|-}
+|
+-}
 iconCore : String -> String -> List (Attribute msg) -> Html msg
 iconCore name innerText attrs =
     let
@@ -552,7 +581,8 @@ iconCore name innerText attrs =
 
 
 {-| loading button.
-|-}
+|
+-}
 submitter : msg -> Bool -> String -> Html msg
 submitter handler loading labelText =
     H.button
@@ -595,6 +625,7 @@ build =
         )
         []
 
+
 {-| selected file struct.
 -}
 type alias SelectedFile =
@@ -604,7 +635,8 @@ type alias SelectedFile =
 
 
 {-| image selector.
-|-}
+|
+-}
 imageSelector : msg -> Maybe SelectedFile -> Html msg
 imageSelector handler mSelected =
     div
@@ -644,8 +676,10 @@ imageSelector handler mSelected =
                         ]
                )
 
+
 {-| simple ok/cancel dialog.
-|-}
+|
+-}
 dialogConfirmation :
     { title : String
     , cancel : msg
