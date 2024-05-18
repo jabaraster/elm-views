@@ -8,7 +8,7 @@ import Html.Styled.Events exposing (..)
 import Html.Styled.Keyed as Keyed
 import Maybe.Extra as Maybe
 import Styles
-import Views exposing (IconKind(..))
+import Views exposing (IconKind(..), concatClass)
 
 
 type alias PagingParam =
@@ -67,7 +67,7 @@ grid columns fetchP filterP viewP datas =
 
 viewFooter : FetchParam msg -> Html msg
 viewFooter fetchP =
-    div [ class B.level ]
+    div [ concatClass [ B.level, B.mt5 ] ]
         [ div [ class B.levelLeft ] []
         , div [ class B.levelRight ]
             [ div [ class B.levelItem ]
