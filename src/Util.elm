@@ -1,11 +1,26 @@
-module Util exposing (..)
+module Util exposing (ListElement(..), buildList, removeIf)
+
+{-| utility.
+
+@docs removeIf
+@docs ListElement
+@docs buildList
+
+-}
 
 
+
+{-| remove list element.
+|
+-}
 removeIf : (a -> Bool) -> List a -> List a
 removeIf pred =
     List.filter (not << pred)
 
 
+{-| list concat utility.
+|
+-}
 type ListElement a
     = Single a
     | SingleIf Bool (() -> a)
@@ -15,6 +30,9 @@ type ListElement a
     | Empty
 
 
+{-| list concat utility.
+|
+-}
 buildList : List (ListElement a) -> List a
 buildList elems =
     List.foldr

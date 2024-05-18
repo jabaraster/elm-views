@@ -599,7 +599,6 @@ submitter handler loading labelText =
         ]
 
 
-
 {-| 'build' function arguments.
 -}
 type alias ViewElement msg =
