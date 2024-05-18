@@ -4,7 +4,7 @@
   "summary": "elm view library.",
   "license": "BSD-3-Clause",
   "version": "3.0.0",
-  "exposed-modules": ["Styles", "Views", "DataTable"],
+  "exposed-modules": ["Styles", "Views", "DataTable", "Util"],
   "elm-version": "0.19.0 <= v < 0.20.0",
   "dependencies": {
     "ahstro/elm-bulma-classes": "4.0.0 <= v < 5.0.0",
