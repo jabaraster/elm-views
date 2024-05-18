@@ -2,7 +2,7 @@ module Views exposing
     ( IconKind(..)
     , InputArg
     , SelectedFile
-    , ViewElement(..)
+    , ViewElement
     , backdrop
     , build
     , concatClass
