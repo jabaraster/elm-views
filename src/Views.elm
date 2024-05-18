@@ -93,6 +93,7 @@ import Html.Styled.Attributes as A exposing (..)
 import Html.Styled.Events exposing (..)
 import Html.Styled.Lazy exposing (..)
 import Loading
+import Util exposing (ListElement)
 
 
 {-| backdrop. ex) modal dialog back.
@@ -598,31 +599,18 @@ submitter handler loading labelText =
         ]
 
 
+
 {-| 'build' function arguments.
 -}
-type ViewElement msg
-    = Tag (Html msg)
-    | Tags (List (Html msg))
-    | Empty
+type alias ViewElement msg =
+    ListElement (Html msg)
 
 
 {-| complexity tag builder.
 -}
 build : List (ViewElement msg) -> List (Html msg)
 build =
-    List.foldr
-        (\elem list ->
-            case elem of
-                Tag a ->
-                    a :: list
-
-                Tags a ->
-                    a ++ list
-
-                Empty ->
-                    list
-        )
-        []
+    Util.buildList
 
 
 {-| selected file struct.
