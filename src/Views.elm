@@ -615,7 +615,7 @@ build =
 {-| selected file struct.
 -}
 type alias SelectedFile =
-    { file : Maybe File
+    { mFile : Maybe File
     , url : String
     }
 
