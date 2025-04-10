@@ -1,4 +1,8 @@
-module Util exposing (ListElement(..), buildList, removeIf)
+module Util exposing
+    ( removeIf
+    , ListElement(..)
+    , buildList
+    )
 
 {-| utility.
 
@@ -7,7 +11,6 @@ module Util exposing (ListElement(..), buildList, removeIf)
 @docs buildList
 
 -}
-
 
 
 {-| remove list element.
